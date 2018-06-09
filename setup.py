@@ -43,7 +43,7 @@ EXCLUDES = [
 
 OPTIONS = {
     'includes' : ['email.mime.text', 'mercurial_keyring', 'sip'],
-    'packages' : ['mercurial', 'hgext', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
+    'packages' : ['certifi', 'mercurial', 'hgext', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
     'excludes' : EXCLUDES,
     'iconfile' : 'src/TortoiseHg.icns',
     'qt_plugins' : QT_PLUGINS,

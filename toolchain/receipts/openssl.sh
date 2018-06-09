@@ -2,10 +2,10 @@
 
 . toolchain/build_settings.conf
 
-NAME="Python"
-VERSION="2.7.14"
-VERIFY_FILE=$DISTDIR/usr/bin/python
-DOWNLOAD_ADDR=https://www.python.org/ftp/python/${VERSION}/${NAME}-${VERSION}.tar.xz
+NAME="openssl"
+VERSION="1.0.2n"
+VERIFY_FILE=$DISTDIR/usr/lib/libcrypto.a
+DOWNLOAD_ADDR=https://www.openssl.org/source/${NAME}-${VERSION}.tar.gz
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz
 
 if [ ! -f $VERIFY_FILE ]; then
@@ -29,25 +29,22 @@ if [ ! -f $VERIFY_FILE ]; then
 
   export CC="clang"
   export CXX="clang++"
-  export CFLAGS="-Os -pipe -fno-common -fno-strict-aliasing -fwrapv -DENABLE_DTRACE -DMACOSX -DNDEBUG -I${DISTDIR}/usr/include"
-  export LDFLAGS="-L${DISTDIR}/usr/lib"
 
-  ./configure \
+  ./Configure \
     --prefix="${DISTDIR}/usr" \
-    --mandir="${DISTDIR}/usr/share/man" \
-    --infodir="${DISTDIR}/usr/share/info" \
-    --enable-ipv6 \
-    --with-system-expat \
-    --with-system-zlib \
-    --with-threads \
-    --enable-framework="${DISTDIR}/System/Library/Frameworks" \
-    --enable-toolbox-glue \
-    --enable-optimizations
+    --openssldir="${DISTDIR}/etc/openssl" \
+    no-ssl2  \
+    zlib-dynamic  \
+    shared  \
+    enable-cms  \
+    darwin64-x86_64-cc  \
+    enable-ec_nistp_64_gcc_128
 
+  make depend
   make ${MAKE_JOBS}
   make install
 
   cd $ROOT_DIR
 else
-  echo "Python installation found."
+  echo "openssl installation found."
 fi

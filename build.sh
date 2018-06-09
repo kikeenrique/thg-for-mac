@@ -1,12 +1,13 @@
 #/bin/bash
 
 export APP_NAME="TortoiseHg"
-export THG_VERSION="4.4.2"
+export THG_VERSION="4.6.0"
 export QT_VERSION="qt5"
 
 rm -rf dist/TortoiseHg.app
 
 # build/verify dependencies
+sh toolchain/receipts/openssl.sh
 sh toolchain/receipts/python.sh
 if [ ${QT_VERSION} = "qt5" ]; then
   sh toolchain/receipts/qt5.sh

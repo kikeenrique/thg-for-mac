@@ -25,3 +25,8 @@ if [ ! -d "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Curren
   echo "Install mercurial_keyring"
   pip install mercurial_keyring
 fi
+
+if [ ! -d "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/hg-git" ]; then
+  echo "Install hg-git"
+  pip install hg-git
+fi
