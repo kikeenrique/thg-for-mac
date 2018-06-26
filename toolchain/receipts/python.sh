@@ -3,7 +3,7 @@
 . toolchain/build_settings.conf
 
 NAME="Python"
-VERSION="2.7.14"
+VERSION="2.7.15"
 VERIFY_FILE=$DISTDIR/usr/bin/python
 DOWNLOAD_ADDR=https://www.python.org/ftp/python/${VERSION}/${NAME}-${VERSION}.tar.xz
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz
@@ -29,7 +29,7 @@ if [ ! -f $VERIFY_FILE ]; then
 
   export CC="clang"
   export CXX="clang++"
-  export CFLAGS="-Os -pipe -fno-common -fno-strict-aliasing -fwrapv -DENABLE_DTRACE -DMACOSX -DNDEBUG -I${DISTDIR}/usr/include"
+  export CFLAGS="-Os -pipe -fno-common -fno-strict-aliasing -fwrapv -DENABLE_DTRACE -DMACOSX -DNDEBUG -I${DISTDIR}/usr/include -I${SDKROOT}/usr/include"
   export LDFLAGS="-L${DISTDIR}/usr/lib"
 
   ./configure \
@@ -37,8 +37,6 @@ if [ ! -f $VERIFY_FILE ]; then
     --mandir="${DISTDIR}/usr/share/man" \
     --infodir="${DISTDIR}/usr/share/info" \
     --enable-ipv6 \
-    --with-system-expat \
-    --with-system-zlib \
     --with-threads \
     --enable-framework="${DISTDIR}/System/Library/Frameworks" \
     --enable-toolbox-glue \

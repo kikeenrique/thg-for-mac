@@ -4,7 +4,7 @@
 
 NAME="QScintilla_gpl"
 if [ ${QT_VERSION} = "qt5" ]; then
-  VERSION="2.10.2"
+  VERSION="2.10.4"
   LIBRARY_VERIFY_FILE="$DISTDIR/usr/lib/libqscintilla2_qt5.dylib"
 else
   VERSION="2.9.4"

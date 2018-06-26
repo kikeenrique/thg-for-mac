@@ -1,7 +1,7 @@
 #/bin/bash
 
 export APP_NAME="TortoiseHg"
-export THG_VERSION="4.6.0"
+export THG_VERSION="4.6.1"
 export QT_VERSION="qt5"
 
 rm -rf dist/TortoiseHg.app
@@ -9,6 +9,8 @@ rm -rf dist/TortoiseHg.app
 # build/verify dependencies
 sh toolchain/receipts/openssl.sh
 sh toolchain/receipts/python.sh
+sh toolchain/receipts/pip.sh
+
 if [ ${QT_VERSION} = "qt5" ]; then
   sh toolchain/receipts/qt5.sh
 else
@@ -21,8 +23,8 @@ if [ ${QT_VERSION} = "qt5" ]; then
 else
   sh toolchain/receipts/pyqt4.sh
 fi
+
 sh toolchain/receipts/qscintilla.sh
-sh toolchain/receipts/pip.sh
 sh toolchain/receipts/packages.sh
 
 # build mercurial + tortoisehg

@@ -41,8 +41,9 @@ EXCLUDES = [
     PYQT_VERSION + '.phonon',
 ]
 
+sys.path.append('src/extra')
 OPTIONS = {
-    'includes' : ['email.mime.text', 'mercurial_keyring', 'sip'],
+    'includes' : ['email.mime.text', 'mercurial_keyring', 'sip', 'sitecustomize'],
     'packages' : ['certifi', 'mercurial', 'hgext', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
     'excludes' : EXCLUDES,
     'iconfile' : 'src/TortoiseHg.icns',

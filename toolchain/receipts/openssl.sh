@@ -3,7 +3,7 @@
 . toolchain/build_settings.conf
 
 NAME="openssl"
-VERSION="1.0.2n"
+VERSION="1.0.2o"
 VERIFY_FILE=$DISTDIR/usr/lib/libcrypto.a
 DOWNLOAD_ADDR=https://www.openssl.org/source/${NAME}-${VERSION}.tar.gz
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz

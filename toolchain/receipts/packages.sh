@@ -2,31 +2,21 @@
 
 . toolchain/build_settings.conf
 
-if [ ! -d "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/iniparse" ]; then
-  echo "Install iniparse"
-  pip install iniparse
+echo "Install iniparse"
+pip install -U iniparse
+
+echo "Install Pygments"
+pip install -U Pygments
+
+echo "Install py2app"
+pip install -U py2app
+
+if [ ${QT_VERSION} = "qt5" ]; then
+  cp toolchain/patches/main-x86_64 ${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/py2app/apptemplate/prebuilt
 fi
 
-if [ ! -d "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/pygments" ]; then
-  echo "Install Pygments"
-  pip install Pygments
-fi
+echo "Install mercurial_keyring"
+pip install -U mercurial_keyring
 
-if [ ! -d "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/py2app" ]; then
-  echo "Install py2app"
-  pip install py2app
-
-  if [ ${QT_VERSION} = "qt5" ]; then
-    cp toolchain/patches/main-x86_64 ${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/py2app/apptemplate/prebuilt
-  fi
-fi
-
-if [ ! -d "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/mercurial_keyring" ]; then
-  echo "Install mercurial_keyring"
-  pip install mercurial_keyring
-fi
-
-if [ ! -d "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/hg-git" ]; then
-  echo "Install hg-git"
-  pip install hg-git
-fi
+echo "Install hg-git"
+pip install -U hg-git
