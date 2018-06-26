@@ -28,6 +28,7 @@ if [ ! -f $VERIFY_FILE ]; then
   fi
 
   #sed -i '' 's/PyStringCheck/PyString_Check/g' siplib/siplib.c
+  #python configure.py --bindir=${DISTDIR}/usr/bin --sip-module PyQt5.sip
   python configure.py --bindir=${DISTDIR}/usr/bin
   make ${MAKE_JOBS}
   make install
