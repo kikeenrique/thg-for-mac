@@ -6,6 +6,8 @@ export QT_VERSION="qt5"
 
 rm -rf dist/TortoiseHg.app
 
+mkdir -p toolchain/downloads
+
 # build/verify dependencies
 sh toolchain/receipts/openssl.sh
 sh toolchain/receipts/python.sh
