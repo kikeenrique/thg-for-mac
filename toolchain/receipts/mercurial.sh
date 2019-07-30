@@ -4,7 +4,7 @@
 
 NAME="mercurial"
 VERSION="4.9.1"
-VERIFY_FILE="$DISTDIR/usr/bin/hg"
+VERIFY_FILE="$BUILDDIR/${NAME}-${VERSION}/hg"
 DOWNLOAD_ADDR="https://www.mercurial-scm.org/release/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 
@@ -15,16 +15,16 @@ if [ ! -f $VERIFY_FILE ]; then
     curl -L $DOWNLOAD_ADDR --output ${DOWNLOAD_FILE}
   fi
   
-  rm -rf toolchain/build/${NAME}-${VERSION}
+  rm -rf ${BUILDDIR}/${NAME}-${VERSION}
   mkdir -p toolchain/build
 
-  if [ ! -d toolchain/build/${NAME}-${VERSION} ]; then
+  if [ ! -d ${BUILDDIR}/${NAME}-${VERSION} ]; then
     echo "Extracting ${DOWNLOAD_FILE}"
     cd toolchain/build
     tar -xf ${DOWNLOAD_FILE}
     cd ${NAME}-${VERSION}
   else
-    cd toolchain/build/${NAME}-${VERSION}
+    cd ${BUILDDIR}/${NAME}-${VERSION}
   fi
 
   python setup.py clean
