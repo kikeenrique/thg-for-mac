@@ -10,12 +10,19 @@ import os
 import sys
 from setuptools import setup
 
-shutil.copyfile('src/thg/thg', 'src/thg.py')
-APP = ['src/thg.py']
+print("CWD:" + os.getcwd() + "\n")
+
+BUILDDIRTHG = os.environ['BUILDDIR'] + "/tortoisehg-" + os.environ['THG_VERSION']
+BUILDDIRHG = os.environ['BUILDDIR'] + "/mercurial-" + os.environ['THG_VERSION']
+
+
+shutil.copyfile( BUILDDIRTHG + '/thg', 'src/thg.py')
+APP = [ 'src/thg.py']
+
 DATA_FILES = [
-    'src/thg/icons',
-    'src/thg/locale',
-    'src/thg/COPYING.txt',
+    BUILDDIRTHG + '/icons',
+    BUILDDIRTHG + '/locale',
+    BUILDDIRTHG + '/COPYING.txt',
 ]
 
 if os.environ['QT_VERSION'] == 'qt5':
@@ -63,6 +70,10 @@ OPTIONS = {
     )
 }
 
+try:
+    os.makedirs(os.getcwd() + '/src/thg/tortoisehg/util')
+except OSError:
+    pass
 shutil.copyfile('src/config.py', 'src/thg/tortoisehg/util/config.py')
 
 # set the command line to run py2app
@@ -75,6 +86,6 @@ setup(
     setup_requires=['py2app'],
 )
 
-shutil.copyfile('src/config.py', 'dist/TortoiseHg.app/Contents/Resources/lib/python2.7/tortoisehg/util/config.py')
-shutil.copyfile('src/hg/hg', 'dist/TortoiseHg.app/Contents/Resources/lib/python2.7/hg')
+shutil.copyfile( 'src/config.py', 'dist/TortoiseHg.app/Contents/Resources/lib/python2.7/tortoisehg/util/config.py')
+shutil.copyfile( BUILDDIRHG + '/hg', 'dist/TortoiseHg.app/Contents/Resources/lib/python2.7/hg')
 os.chmod('dist/TortoiseHg.app/Contents/Resources/lib/python2.7/hg', 0755)
