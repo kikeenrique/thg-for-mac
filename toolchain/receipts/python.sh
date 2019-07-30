@@ -3,7 +3,7 @@
 . toolchain/build_settings.conf
 
 NAME="Python"
-VERSION="2.7.15"
+VERSION="2.7.16"
 VERIFY_FILE=$DISTDIR/usr/bin/python
 DOWNLOAD_ADDR=https://www.python.org/ftp/python/${VERSION}/${NAME}-${VERSION}.tar.xz
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz

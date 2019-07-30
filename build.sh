@@ -1,12 +1,14 @@
 #/bin/bash
 
+. toolchain/build_settings.conf
+
 export APP_NAME="TortoiseHg"
-export THG_VERSION="4.6.1"
+export THG_VERSION="4.9.1"
 export QT_VERSION="qt5"
 
 rm -rf dist/TortoiseHg.app
 
-mkdir -p toolchain/downloads
+mkdir -p ${DOWNLOADDIR}
 
 # build/verify dependencies
 sh toolchain/receipts/openssl.sh

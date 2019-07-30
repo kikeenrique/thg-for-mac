@@ -3,7 +3,7 @@
 . toolchain/build_settings.conf
 
 NAME="sip"
-VERSION="4.19.8"
+VERSION="4.19.13"
 VERIFY_FILE="$DISTDIR/usr/bin/sip"
 DOWNLOAD_ADDR="http://sourceforge.net/projects/pyqt/files/sip/${NAME}-${VERSION}/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
