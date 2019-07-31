@@ -15,8 +15,13 @@ print("CWD:" + os.getcwd() + "\n")
 BUILDDIRTHG = os.environ['BUILDDIR'] + "/tortoisehg-" + os.environ['THG_VERSION']
 BUILDDIRHG = os.environ['BUILDDIR'] + "/mercurial-" + os.environ['THG_VERSION']
 
+fileToPatch = 'src/thg.py'
+shutil.copyfile( BUILDDIRTHG + '/thg', fileToPatch)
+patchFile = 'src/thg-path.patch'
+cmd = '%s "%s" "%s"' % ("/usr/bin/patch", fileToPatch, patchFile)
+print("\n"+cmd)
+ret = os.system(cmd)
 
-shutil.copyfile( BUILDDIRTHG + '/thg', 'src/thg.py')
 APP = [ 'src/thg.py']
 
 DATA_FILES = [
@@ -48,7 +53,13 @@ EXCLUDES = [
     PYQT_VERSION + '.phonon',
 ]
 
-sys.path.append('src/extra')
+sys.path.append("/src/extra")
+
+#sys.path.append(os.environ['ROOT_DIR'] + "/src/extra")
+#sys.path.append(os.environ['DISTDIR'])
+#print("PATH post" )
+#print(sys.path)
+
 OPTIONS = {
     'includes' : ['email.mime.text', 'mercurial_keyring', 'sip', 'sitecustomize'],
     'packages' : ['certifi', 'mercurial', 'hgext', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
@@ -75,6 +86,7 @@ try:
 except OSError:
     pass
 shutil.copyfile('src/config.py', 'src/thg/tortoisehg/util/config.py')
+print("phase setup py2app..." )
 
 # set the command line to run py2app
 sys.argv = ['setup.py', 'py2app']
@@ -85,6 +97,7 @@ setup(
     options={'py2app': OPTIONS},
     setup_requires=['py2app'],
 )
+print("phase copyfile ..." )
 
 shutil.copyfile( 'src/config.py', 'dist/TortoiseHg.app/Contents/Resources/lib/python2.7/tortoisehg/util/config.py')
 shutil.copyfile( BUILDDIRHG + '/hg', 'dist/TortoiseHg.app/Contents/Resources/lib/python2.7/hg')

@@ -1,0 +1,12 @@
+--- src/thg.py	2019-07-31 23:20:18.000000000 +0200
++++ src/thg.py	2019-07-31 23:26:56.000000000 +0200
+@@ -21,6 +21,9 @@
+     # Add the explicit path where PyQt4 and other libs are
+     bundlepath = os.path.dirname(os.path.realpath(__file__))
+     sys.path.insert(0, os.path.join(bundlepath, 'lib/python2.6/lib-dynload'))
++    # We need the embedded hg to use the embedded python
++    exepath = os.path.normpath(os.path.join(bundlepath, os.pardir, 'MacOS'))
++    os.environ['PATH'] = exepath + os.pathsep + os.environ['PATH']
+ 
+ if hasattr(sys, "frozen"):
+     if sys.frozen == 'windows_exe':
