@@ -6,11 +6,11 @@ function log() {
     printf "+++++++++++++++++++++++++++++++\n"
 }
 
-. toolchain/build_settings.conf
-
 export APP_NAME="TortoiseHg"
 export THG_VERSION="4.9.1"
 export QT_VERSION="qt5"
+
+. toolchain/build_settings.conf
 
 rm -rf dist/TortoiseHg.app
 
@@ -60,6 +60,7 @@ log "application package"
 python setup.py
 
 if [ -d dist/${APP_NAME}.app ]; then
+  log "rm -rf build..."
   rm -rf build
   rm -rf toolchain/build
 

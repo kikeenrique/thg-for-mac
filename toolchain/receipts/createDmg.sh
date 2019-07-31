@@ -89,6 +89,9 @@ sync
 hdiutil detach "${DEVICE}"
 
 # now make the final image a compressed disk image
+echo "Clean previous image file"
+rm -f ${DMG_FINAL}
+
 echo "Creating compressed image"
 hdiutil convert "${DMG_TMP}" -format UDZO -imagekey zlib-level=9 -o "${DMG_FINAL}"
 
