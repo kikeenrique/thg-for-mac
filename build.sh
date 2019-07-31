@@ -12,6 +12,15 @@ export QT_VERSION="qt5"
 
 . toolchain/build_settings.conf
 
+PRECOMPILED_FILE="${DISTDIR}.zip"
+if [ -f $PRECOMPILED_FILE ]; then
+    echo "guay"
+    unzip ${PRECOMPILED_FILE} -d ${ROOT_DIR}/toolchain
+    exit
+fi
+
+unzip  -d
+
 rm -rf dist/TortoiseHg.app
 
 mkdir -p ${DOWNLOADDIR}
