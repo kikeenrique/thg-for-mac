@@ -16,6 +16,7 @@ PRECOMPILED_FILE="${DISTDIR}.zip"
 if [ -f $PRECOMPILED_FILE ]; then
     unzip ${PRECOMPILED_FILE} -d ${ROOT_DIR}/toolchain
 fi
+ls -la ${DISTDIR}
 
 rm -rf dist/TortoiseHg.app
 
