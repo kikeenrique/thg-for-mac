@@ -8,7 +8,8 @@ VERIFY_FILE=$DISTDIR/usr/bin/python
 DOWNLOAD_ADDR=https://www.python.org/ftp/python/${VERSION}/${NAME}-${VERSION}.tar.xz
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz
 
-if [ ! -f $VERIFY_FILE ]; then
+echo ${VERIFY_FILE}
+if [ ! -f ${VERIFY_FILE} ]; then
 
   if [ ! -f $DOWNLOAD_FILE ]; then
     echo "Downloading ${DOWNLOAD_ADDR}"
