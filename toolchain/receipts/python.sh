@@ -9,7 +9,7 @@ DOWNLOAD_ADDR=https://www.python.org/ftp/python/${VERSION}/${NAME}-${VERSION}.ta
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz
 
 echo ${VERIFY_FILE}
-if [ ! -f ${VERIFY_FILE} ]; then
+if [ ! -L ${VERIFY_FILE} ]; then
 
   if [ ! -f $DOWNLOAD_FILE ]; then
     echo "Downloading ${DOWNLOAD_ADDR}"
