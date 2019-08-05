@@ -6,14 +6,29 @@ function log() {
     printf "+++++++++++++++++++++++++++++++\n"
 }
 
+function print_env() {
+    printf "-------------------------------\n"
+    printf "DOWNLOADDIR:${DOWNLOADDIR}"
+    printf "BUILDDIR:${BUILDDIR}"
+    printf "DISTDIR:${DISTDIR}"
+    printf "MACOSX_DEPLOYMENT_TARGET:${MACOSX_DEPLOYMENT_TARGET}"
+    printf "DISTDIR:${DISTDIR}"
+    printf "SDKROOT:${SDKROOT}"
+    printf "PATH:${PATH}"
+    printf "-------------------------------\n"
+}
+
 export APP_NAME="TortoiseHg"
 export THG_VERSION="4.9.1"
 export QT_VERSION="qt5"
 
 . toolchain/build_settings.conf
 
+print_env
+
 PRECOMPILED_FILE="${DISTDIR}.zip"
 if [ -f $PRECOMPILED_FILE ]; then
+    log "using precompiled libraries"
     unzip -q ${PRECOMPILED_FILE} -d ${ROOT_DIR}/toolchain
 fi
 ls -la ${DISTDIR}
@@ -29,6 +44,8 @@ log python.sh
 sh toolchain/receipts/python.sh
 log pip.sh
 sh toolchain/receipts/pip.sh
+
+print_env
 
 if [ ${QT_VERSION} = "qt5" ]; then
   log qt5.sh
