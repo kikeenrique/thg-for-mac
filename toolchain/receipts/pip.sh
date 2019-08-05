@@ -19,4 +19,5 @@ if [ ! -f $VERIFY_FILE ]; then
   cd $ROOT_DIR
 else
   echo "${NAME} already installed."
+  export PATH=$PATH:"$DISTDIR/System/Library/Frameworks/Python.framework/Versions/Current/bin/"
 fi
