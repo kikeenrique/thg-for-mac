@@ -14,7 +14,7 @@ export QT_VERSION="qt5"
 
 PRECOMPILED_FILE="${DISTDIR}.zip"
 if [ -f $PRECOMPILED_FILE ]; then
-    unzip ${PRECOMPILED_FILE} -d ${ROOT_DIR}/toolchain
+    unzip -q ${PRECOMPILED_FILE} -d ${ROOT_DIR}/toolchain
 fi
 ls -la ${DISTDIR}
 

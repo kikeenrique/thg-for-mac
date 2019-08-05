@@ -4,11 +4,11 @@
 
 NAME="mercurial"
 VERSION="4.9.1"
-VERIFY_FILE="$BUILDDIR/${NAME}-${VERSION}/hg"
+VERIFY_FILE="$BUILDDIR/System/Library/Frameworks/Python.framework/Versions/2.7/bin/hg"
 DOWNLOAD_ADDR="https://www.mercurial-scm.org/release/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 
-if [ ! -f $VERIFY_FILE ]; then
+if [ -L $VERIFY_FILE ]; then
 
   if [ ! -f $DOWNLOAD_FILE ]; then
     echo "Downloading ${DOWNLOAD_ADDR}"
