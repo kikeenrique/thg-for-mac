@@ -7,15 +7,15 @@ function log() {
 }
 
 function print_env() {
-    printf "-------------------------------\n"
-    printf "DOWNLOADDIR:${DOWNLOADDIR}"
-    printf "BUILDDIR:${BUILDDIR}"
-    printf "DISTDIR:${DISTDIR}"
-    printf "MACOSX_DEPLOYMENT_TARGET:${MACOSX_DEPLOYMENT_TARGET}"
-    printf "DISTDIR:${DISTDIR}"
-    printf "SDKROOT:${SDKROOT}"
-    printf "PATH:${PATH}"
-    printf "-------------------------------\n"
+    printf "+-------------------------------\n"
+    printf "DOWNLOADDIR:${DOWNLOADDIR}\n"
+    printf "BUILDDIR:${BUILDDIR}\n"
+    printf "DISTDIR:${DISTDIR}\n"
+    printf "MACOSX_DEPLOYMENT_TARGET:${MACOSX_DEPLOYMENT_TARGET}\n"
+    printf "DISTDIR:${DISTDIR}\n"
+    printf "SDKROOT:${SDKROOT}\n"
+    printf "PATH:${PATH}\n"
+    printf "+-------------------------------\n"
 }
 
 export APP_NAME="TortoiseHg"
