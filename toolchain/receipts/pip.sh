@@ -21,11 +21,14 @@ else
   echo "${NAME} already installed."
   export PATH=$PATH:"$DISTDIR/System/Library/Frameworks/Python.framework/Versions/Current/bin/"
 
+  echo "modifying installed ${NAME}"
+  cat ${VERIFY_FILE}
   # For pip, replace shebang with a generic execution, without customs paths
 #  sed -i '/#!/c\/usr/bin/env python' ${VERIFY_FILE}
   sed -i '' -e '1d' ${VERIFY_FILE}
   sed -i '' '1i\
 /usr/bin/env python
 '  ${VERIFY_FILE}
+  cat ${VERIFY_FILE}
 
 fi
