@@ -8,6 +8,9 @@ function log() {
 
 function print_env() {
     printf "+-------------------------------\n"
+    which python
+    which pip
+    printf "PWD:${PWD}\n"
     printf "DOWNLOADDIR:${DOWNLOADDIR}\n"
     printf "BUILDDIR:${BUILDDIR}\n"
     printf "DISTDIR:${DISTDIR}\n"
