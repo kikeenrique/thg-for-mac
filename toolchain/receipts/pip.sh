@@ -14,7 +14,7 @@ DOWNLOAD_FILE="${DOWNLOADDIR}/get-pip.py"
     curl -L $DOWNLOAD_ADDR --output ${DOWNLOAD_FILE}
   fi
 
-  python --bindir=${DISTDIR}/usr/bin ${DOWNLOAD_FILE} 
+  python ${DOWNLOAD_FILE} 
 
   cd $ROOT_DIR
 #else
