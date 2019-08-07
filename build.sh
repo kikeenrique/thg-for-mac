@@ -10,6 +10,8 @@ function print_env() {
     printf "+-------------------------------\n"
     which -a python
     which -a pip
+    printf "+EXPORT \n"
+    export
     printf "PWD:${PWD}\n"
     printf "DOWNLOADDIR:${DOWNLOADDIR}\n"
     printf "BUILDDIR:${BUILDDIR}\n"
