@@ -14,7 +14,7 @@ DOWNLOAD_FILE="${DOWNLOADDIR}/get-pip.py"
     curl -L $DOWNLOAD_ADDR --output ${DOWNLOAD_FILE}
   fi
 
-  python ${DOWNLOAD_FILE} 
+  python ${DOWNLOAD_FILE}  --user
 
   cd $ROOT_DIR
 #else
@@ -32,3 +32,4 @@ DOWNLOAD_FILE="${DOWNLOADDIR}/get-pip.py"
 #  cat ${VERIFY_FILE}
 
 #fi
+
