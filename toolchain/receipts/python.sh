@@ -49,4 +49,5 @@ if [ ! -L ${VERIFY_FILE} ]; then
   cd $ROOT_DIR
 else
   echo "Python installation found."
+  export LDFLAGS="-L${DISTDIR}/usr/lib"
 fi
