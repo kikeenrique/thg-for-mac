@@ -23,11 +23,11 @@ else
 
   echo "modifying installed ${NAME}"
   cat ${VERIFY_FILE}
+
   # For pip, replace shebang with a generic execution, without customs paths
-#  sed -i '/#!/c\/usr/bin/env python' ${VERIFY_FILE}
   sed -i '' -e '1d' ${VERIFY_FILE}
   sed -i '' '1i\
-#!/usr/bin/env python
+#!/Users/vagrant/git/toolchain/toolchain-qt5/System/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python
 '  ${VERIFY_FILE}
   cat ${VERIFY_FILE}
 
