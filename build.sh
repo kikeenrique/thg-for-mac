@@ -1,5 +1,6 @@
 #/bin/bash
 
+SHELL="time sh"
 function log() {
     printf "+++++++++++ BUILD.SH ++++++++++\n"
     printf "+++ %s \n" $1
@@ -44,43 +45,46 @@ mkdir -p ${DOWNLOADDIR}
 
 # build/verify dependencies
 log openssl.sh
-sh toolchain/receipts/openssl.sh
+${SHELL} toolchain/receipts/openssl.sh
 log python.sh
-sh toolchain/receipts/python.sh
+${SHELL} toolchain/receipts/python.sh
 log pip.sh
-sh toolchain/receipts/pip.sh
+${SHELL} toolchain/receipts/pip.sh
 
 print_env
 
 if [ ${QT_VERSION} = "qt5" ]; then
   log qt5.sh
-  sh toolchain/receipts/qt5.sh
+  ${SHELL} toolchain/receipts/qt5.sh
 else
   log qt4.sh
-  sh toolchain/receipts/qt4.sh
+  ${SHELL} toolchain/receipts/qt4.sh
 fi
 log qscintilla.sh
-sh toolchain/receipts/qscintilla.sh
+${SHELL} toolchain/receipts/qscintilla.sh
 log sip.sh
-sh toolchain/receipts/sip.sh
+${SHELL} toolchain/receipts/sip.sh
 if [ ${QT_VERSION} = "qt5" ]; then
     log pyqt5.sh
-    sh toolchain/receipts/pyqt5.sh
+    ${SHELL} toolchain/receipts/pyqt5.sh
 else
     log pyq4.sh
-    sh toolchain/receipts/pyqt4.sh
+    ${SHELL} toolchain/receipts/pyqt4.sh
 fi
 
 log qscintilla.sh
-sh toolchain/receipts/qscintilla.sh
+${SHELL} toolchain/receipts/qscintilla.sh
+
+print_env
+
 log packages.sh
-sh toolchain/receipts/packages.sh
+${SHELL} toolchain/receipts/packages.sh
 
 # build mercurial + tortoisehg
 log mercurial.sh
-sh toolchain/receipts/mercurial.sh
+${SHELL} toolchain/receipts/mercurial.sh
 log tortoisehg.sh
-sh toolchain/receipts/tortoisehg.sh
+${SHELL} toolchain/receipts/tortoisehg.sh
 
 # create application package
 log "application package"
@@ -97,5 +101,5 @@ if [ -d dist/${APP_NAME}.app ]; then
     cp -R ${DISTDIR}/usr/lib/QtNetwork.framework dist/${APP_NAME}.app/Contents/Frameworks/
   fi
   log "createDmg.sh"
-  sh toolchain/receipts/createDmg.sh
+  ${SHELL} toolchain/receipts/createDmg.sh
 fi
