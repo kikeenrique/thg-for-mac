@@ -1,5 +1,10 @@
 #/bin/sh -xv
 
+# Configure shell to exit if any script finish with error
+set -e
+# Configure bashism to exit if piped output also finish with error
+set -o pipefail
+
 SHELL="time sh -xv"
 function log() {
     printf "+++++++++++ BUILD.SH ++++++++++\n"
