@@ -1,6 +1,6 @@
-#/bin/bash
+#/bin/sh -xv
 
-SHELL="time sh"
+SHELL="time sh -xv"
 function log() {
     printf "+++++++++++ BUILD.SH ++++++++++\n"
     printf "+++ %s \n" $1

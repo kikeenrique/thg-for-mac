@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Deploy to bitrise
 mkdir deploy

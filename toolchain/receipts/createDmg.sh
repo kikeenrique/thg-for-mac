@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 DMG_BACKGROUND_IMG="background.png"
 
