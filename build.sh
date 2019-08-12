@@ -46,8 +46,6 @@ ls -la ${DISTDIR}
 
 rm -rf dist/TortoiseHg.app
 
-mkdir -p ${DOWNLOADDIR}
-
 # build/verify dependencies
 log openssl.sh
 ${SHELL} toolchain/receipts/openssl.sh
