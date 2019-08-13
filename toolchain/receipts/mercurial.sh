@@ -8,7 +8,7 @@ VERIFY_FILE="${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/2.7/
 DOWNLOAD_ADDR="https://www.mercurial-scm.org/release/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 
-if [ -L $VERIFY_FILE ]; then
+if [ ! -L $VERIFY_FILE ]; then
 
   if [ ! -f $DOWNLOAD_FILE ]; then
     echo "Downloading ${DOWNLOAD_ADDR}"
