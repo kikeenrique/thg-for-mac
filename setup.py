@@ -53,9 +53,9 @@ EXCLUDES = [
     PYQT_VERSION + '.phonon',
 ]
 
-sys.path.append("/src/extra")
+#sys.path.append("/src/extra")
 
-#sys.path.append(os.environ['ROOT_DIR'] + "/src/extra")
+sys.path.append(os.environ['ROOT_DIR'] + "/src/extra")
 #sys.path.append(os.environ['DISTDIR'])
 #print("PATH post" )
 #print(sys.path)
