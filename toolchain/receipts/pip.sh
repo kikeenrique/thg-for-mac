@@ -27,7 +27,7 @@ else
   # For pip, replace shebang with a generic execution, without customs paths
   sed -i '' -e '1d' ${VERIFY_FILE}
   sed -i '' '1i\
-#!/Users/vagrant/git/toolchain/toolchain-qt5/System/Library/Frameworks/Python.framework/Versions/2.7/Resources/Python
+#!/usr/bin/env python
 '  ${VERIFY_FILE}
   cat ${VERIFY_FILE}
 
