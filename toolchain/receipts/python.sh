@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -xv
 
 . toolchain/build_settings.conf
 
