@@ -4,7 +4,7 @@
 
 NAME="mercurial"
 VERSION="4.9.1"
-VERIFY_FILE="$BUILDDIR/System/Library/Frameworks/Python.framework/Versions/2.7/bin/hg"
+VERIFY_FILE="${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/2.7/bin/hg"
 DOWNLOAD_ADDR="https://www.mercurial-scm.org/release/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 

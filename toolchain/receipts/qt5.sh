@@ -4,7 +4,7 @@
 
 NAME="qt-everywhere-opensource-src"
 VERSION="5.9.8"
-VERIFY_FILE="$DISTDIR/usr/bin/qmake"
+VERIFY_FILE="${DISTDIR}/usr/bin/qmake"
 DOWNLOAD_ADDR="http://download.qt.io/official_releases/qt/5.9/${VERSION}/single/${NAME}-${VERSION}.tar.xz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz"
 

@@ -4,7 +4,7 @@
 
 NAME="openssl"
 VERSION="1.0.2s"
-VERIFY_FILE=$DISTDIR/usr/lib/libcrypto.a
+VERIFY_FILE=${DISTDIR}/usr/lib/libcrypto.a
 DOWNLOAD_ADDR=https://www.openssl.org/source/${NAME}-${VERSION}.tar.gz
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz
 

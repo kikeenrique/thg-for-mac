@@ -4,7 +4,7 @@
 
 NAME="tortoisehg"
 VERSION="4.9.1"
-VERIFY_FILE="$BUILDDIR/${NAME}-${VERSION}/thg"
+VERIFY_FILE="${DISTDIR}/${NAME}-${VERSION}/thg"
 DOWNLOAD_ADDR="https://bitbucket.org/tortoisehg/targz/downloads/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 

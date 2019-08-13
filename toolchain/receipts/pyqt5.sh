@@ -4,7 +4,7 @@
 
 NAME="PyQt5_gpl"
 VERSION="5.9.2"
-VERIFY_FILE="$DISTDIR/usr/bin/pyuic5"
+VERIFY_FILE="${DISTDIR}/usr/bin/pyuic5"
 DOWNLOAD_ADDR="http://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-${VERSION}/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 
