@@ -94,6 +94,11 @@ log "application package"
 
 python setup.py
 
+# create zip cached, not on bitrise
+if [ -z "${BITRISE_APP_TITLE}" ]; then
+    zip -r ${PRECOMPILED_FILE} ${DISTDIR}
+fi
+
 if [ -d dist/${APP_NAME}.app ]; then
   log "rm -rf build..."
   rm -rf build
