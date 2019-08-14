@@ -29,6 +29,27 @@ function print_env() {
     printf "+-------------------------------\n"
 }
 
+function execute_receipt() {
+    log $1
+    ${SHELL} toolchain/receipts/$1
+}
+
+function zip_precompiled() {
+    # create zip cached, not on bitrise
+    if [ -z "${BITRISE_APP_TITLE}" ]; then
+        cd "${DISTDIR}/.."
+        if [ "${QT_VERSION}" = "qt5" ]; then
+          export TARGET="toolchain-qt5"
+        else
+          export TARGET="toolchain-qt4"
+        fi
+        echo "${PRECOMPILED_FILE} ${TARGET}"
+        rm -f ${PRECOMPILED_FILE}
+        zip -rq ${PRECOMPILED_FILE} ${TARGET}
+        cd ${ROOT}
+    fi
+}
+
 export APP_NAME="TortoiseHg"
 export THG_VERSION="4.9.1"
 export QT_VERSION="qt5"
@@ -47,57 +68,35 @@ ls -la ${DISTDIR}
 rm -rf dist/TortoiseHg.app
 
 # build/verify dependencies
-log openssl.sh
-${SHELL} toolchain/receipts/openssl.sh
-log python.sh
-${SHELL} toolchain/receipts/python.sh
-log pip.sh
-${SHELL} toolchain/receipts/pip.sh
+execute_receipt openssl.sh
+execute_receipt python.sh
+execute_receipt pip.sh
 
 print_env
 
-if [ ${QT_VERSION} = "qt5" ]; then
-  log qt5.sh
-  ${SHELL} toolchain/receipts/qt5.sh
-else
-  log qt4.sh
-  ${SHELL} toolchain/receipts/qt4.sh
-fi
-log qscintilla.sh
-${SHELL} toolchain/receipts/qscintilla.sh
-log sip.sh
-${SHELL} toolchain/receipts/sip.sh
-if [ ${QT_VERSION} = "qt5" ]; then
-    log pyqt5.sh
-    ${SHELL} toolchain/receipts/pyqt5.sh
-else
-    log pyq4.sh
-    ${SHELL} toolchain/receipts/pyqt4.sh
-fi
+execute_receipt "${QT_VERSION}.sh"
 
-log qscintilla.sh
-${SHELL} toolchain/receipts/qscintilla.sh
+execute_receipt qscintilla.sh
+execute_receipt sip.sh
+
+execute_receipt "py${QT_VERSION}.sh"
+
+execute_receipt qscintilla.sh
 
 print_env
 
-log packages.sh
-${SHELL} toolchain/receipts/packages.sh
+execute_receipt packages.sh
 
 # build mercurial + tortoisehg
-log mercurial.sh
-${SHELL} toolchain/receipts/mercurial.sh
-log tortoisehg.sh
-${SHELL} toolchain/receipts/tortoisehg.sh
+execute_receipt mercurial.sh
+execute_receipt tortoisehg.sh
 
 # create application package
 log "application package"
 
 python setup.py
 
-# create zip cached, not on bitrise
-if [ -z "${BITRISE_APP_TITLE}" ]; then
-    zip -r ${PRECOMPILED_FILE} ${DISTDIR}
-fi
+zip_precompiled
 
 if [ -d dist/${APP_NAME}.app ]; then
   log "rm -rf build..."
