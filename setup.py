@@ -63,6 +63,7 @@ sys.path.append(os.environ['ROOT_DIR'] + "/src/extra")
 OPTIONS = {
     'includes' : ['email.mime.text', 'mercurial_keyring', 'sip', 'sitecustomize'],
     'packages' : ['certifi', 'mercurial', 'hgext', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
+#    'packages' : ['certifi', 'mercurial', 'hgext3rd', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
     'excludes' : EXCLUDES,
     'iconfile' : 'src/TortoiseHg.icns',
     'qt_plugins' : QT_PLUGINS,
