@@ -14,6 +14,7 @@ DOWNLOAD_FILE="${DOWNLOADDIR}/get-pip.py"
     curl -L $DOWNLOAD_ADDR --output ${DOWNLOAD_FILE}
   fi
 
+  echo "PATH--> ${PATH}"
   python -v
   python -vv ${DOWNLOAD_FILE}
 
