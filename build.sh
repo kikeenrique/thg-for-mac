@@ -109,9 +109,10 @@ function create_DMG() {
 ##### MAIN #####
 
 load_env
-print_env
 
 unzip_precompiled_build_dependencies
+
+print_env
 
 rm -rf dist/TortoiseHg.app
 
