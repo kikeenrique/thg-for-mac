@@ -7,7 +7,7 @@ VERIFY_FILE="${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Curr
 DOWNLOAD_ADDR="http://bootstrap.pypa.io/get-pip.py"
 DOWNLOAD_FILE="${DOWNLOADDIR}/get-pip.py"
 
-if [ ! -f $VERIFY_FILE ]; then
+#if [ ! -f $VERIFY_FILE ]; then
 
   if [ ! -f $DOWNLOAD_FILE ]; then
     echo "Downloading ${DOWNLOAD_ADDR}"
@@ -17,19 +17,19 @@ if [ ! -f $VERIFY_FILE ]; then
   python -vv ${DOWNLOAD_FILE}
 
   cd $ROOT_DIR
-else
-  echo "${NAME} already installed."
-  export PATH="${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/bin/":$PATH
-
-  echo "modifying installed ${NAME}"
-  cat ${VERIFY_FILE}
-
-  # For pip, replace shebang with a generic execution, without customs paths
-  sed -i '' -e '1d' ${VERIFY_FILE}
-  sed -i '' '1i\
-#!/usr/bin/env python
-'  ${VERIFY_FILE}
-  cat ${VERIFY_FILE}
-
-fi
-
+#else
+#  echo "${NAME} already installed."
+#  export PATH="${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/bin/":$PATH
+#
+#  echo "modifying installed ${NAME}"
+#  cat ${VERIFY_FILE}
+#
+#  # For pip, replace shebang with a generic execution, without customs paths
+#  sed -i '' -e '1d' ${VERIFY_FILE}
+#  sed -i '' '1i\
+##!/usr/bin/env python
+#'  ${VERIFY_FILE}
+#  cat ${VERIFY_FILE}
+#
+#fi
+#

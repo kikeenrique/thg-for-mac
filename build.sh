@@ -26,8 +26,11 @@ function load_env() {
 function print_env() {
     printf "+-------------------------------\n"
     which -a python
+    printf "+-------------------\n"
+    /usr/bin/env python
+    printf "+-------------------\n"
     which -a pip
-    printf "+EXPORT \n"
+    printf "+EXPORTED: \n"
     export
     printf "PWD:${PWD}\n"
     printf "DOWNLOADDIR:${DOWNLOADDIR}\n"
