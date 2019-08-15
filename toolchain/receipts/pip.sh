@@ -14,6 +14,7 @@ DOWNLOAD_FILE="${DOWNLOADDIR}/get-pip.py"
     curl -L $DOWNLOAD_ADDR --output ${DOWNLOAD_FILE}
   fi
 
+  python -v
   python -vv ${DOWNLOAD_FILE}
 
   cd $ROOT_DIR
@@ -24,12 +25,12 @@ DOWNLOAD_FILE="${DOWNLOADDIR}/get-pip.py"
 #  echo "modifying installed ${NAME}"
 #  cat ${VERIFY_FILE}
 #
-#  # For pip, replace shebang with a generic execution, without customs paths
-#  sed -i '' -e '1d' ${VERIFY_FILE}
-#  sed -i '' '1i\
-##!/usr/bin/env python
-#'  ${VERIFY_FILE}
-#  cat ${VERIFY_FILE}
+  # For pip, replace shebang with a generic execution, without customs paths
+  sed -i '' -e '1d' ${VERIFY_FILE}
+  sed -i '' '1i\
+#!/usr/bin/env python
+'  ${VERIFY_FILE}
+  cat ${VERIFY_FILE}
 #
 #fi
 #
