@@ -41,11 +41,13 @@ function print_env() {
 }
 
 function execute_receipt() {
-    log $1
+    log "execute_receipt ${1}"
     ${SHELL} toolchain/receipts/$1
 }
 
 function zip_precompiled_build_dependencies() {
+    log zip_precompiled_build_dependencies
+
     # create zip cached, not on bitrise
     if [ -z "${BITRISE_APP_TITLE}" ]; then
         cd "${DISTDIR}/.."
@@ -62,7 +64,11 @@ function zip_precompiled_build_dependencies() {
 }
 
 function unzip_precompiled_build_dependencies() {
-    if [ -z "${BITRISE_APP_TITLE}" ]; then
+    log unzip_precompiled_build_dependencies
+
+    # unzip precompile, just on bitrise
+    if [ ! -z "${BITRISE_APP_TITLE}" ]; then
+        log "look for precompiled libraries..."
         if [ -f $PRECOMPILED_FILE ]; then
             log "using precompiled libraries"
             unzip -q ${PRECOMPILED_FILE} -d ${ROOT_DIR}/toolchain
@@ -72,11 +78,14 @@ function unzip_precompiled_build_dependencies() {
 }
 
 function clean_build() {
-    log "rm -rf build..."
+    log clean_build
+
     rm -rf build
     rm -rf toolchain/build
 }
 function clean_all() {
+    log clean_all
+
     clean_build
     rm -rf .eggs
     rm -rf src/thg/
@@ -84,7 +93,8 @@ function clean_all() {
     rm -rf ${DISTDIR}
 }
 
-function create_APP() {
+function create_DMG() {
+    log create_DMG
     if [ -d dist/${APP_NAME}.app ]; then
         clean_build
 
@@ -126,4 +136,4 @@ python setup.py
 
 zip_precompiled_build_dependencies
 
-create_APP
+create_DMG
