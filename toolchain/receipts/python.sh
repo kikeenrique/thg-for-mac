@@ -41,8 +41,7 @@ if [ ! -L ${VERIFY_FILE} ]; then
     --with-threads \
     --enable-framework="${DISTDIR}/System/Library/Frameworks" \
     --enable-toolbox-glue \
-    --enable-optimizations
-    --without-doc-strings
+    --enable-optimizations 
 
   make ${MAKE_JOBS}
   make install
