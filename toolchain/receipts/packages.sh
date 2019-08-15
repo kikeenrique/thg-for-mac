@@ -2,6 +2,8 @@
 
 . toolchain/build_settings.conf
 
+export PYTHONVERBOSE=1
+
 echo "Install iniparse"
 pip install -U iniparse
 
