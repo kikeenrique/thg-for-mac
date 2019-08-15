@@ -12,15 +12,15 @@ function log() {
 }
 
 function load_env() {
-    SHELL="time sh -xv"
+    export SHELL="time sh -xv"
 
     export APP_NAME="TortoiseHg"
     export THG_VERSION="4.9.1"
     export QT_VERSION="qt5"
 
-    PRECOMPILED_FILE="${DISTDIR}.zip"
-
     . toolchain/build_settings.conf
+
+    export PRECOMPILED_FILE="${DISTDIR}.zip"
 }
 
 function print_env() {
@@ -59,17 +59,17 @@ function zip_precompiled_build_dependencies() {
         echo "${PRECOMPILED_FILE} ${TARGET}"
         rm -f ${PRECOMPILED_FILE}
         zip -rq ${PRECOMPILED_FILE} ${TARGET}
-        cd ${ROOT}
+        cd ${ROOT_DIR}
     fi
 }
 
 function unzip_precompiled_build_dependencies() {
     log unzip_precompiled_build_dependencies
 
-    # unzip precompile, just on bitrise
     if [ ! -z "${BITRISE_APP_TITLE}" ]; then
-        log "look for precompiled libraries..."
-        if [ -f $PRECOMPILED_FILE ]; then
+        # unzip precompile, just on bitrise
+        log "look for precompiled libraries... ${PRECOMPILED_FILE}"
+        if [ -f ${PRECOMPILED_FILE} ]; then
             log "using precompiled libraries"
             unzip -q ${PRECOMPILED_FILE} -d ${ROOT_DIR}/toolchain
         fi

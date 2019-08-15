@@ -9,7 +9,7 @@ DOWNLOAD_ADDR=https://www.python.org/ftp/python/${VERSION}/${NAME}-${VERSION}.ta
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz
 
 echo ${VERIFY_FILE}
-if [ ! -L ${VERIFY_FILE} ]; then
+if [ ! -f ${VERIFY_FILE} ]; then
 
   if [ ! -f $DOWNLOAD_FILE ]; then
     echo "Downloading ${DOWNLOAD_ADDR}"
@@ -41,13 +41,13 @@ if [ ! -L ${VERIFY_FILE} ]; then
     --with-threads \
     --enable-framework="${DISTDIR}/System/Library/Frameworks" \
     --enable-toolbox-glue \
-    --enable-optimizations 
+    --enable-optimizations
 
   make ${MAKE_JOBS}
   make install
 
   cd $ROOT_DIR
 else
-  echo "Python installation found."
+  echo "${NAME} already installed."
   export LDFLAGS="-L${DISTDIR}/usr/lib"
 fi
