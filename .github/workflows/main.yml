@@ -20,7 +20,7 @@ jobs:
           set -x
           source toolchain/app_output_config.conf
           echo ::set-output name=asset-path::$(echo $DMG_FINAL)
-#          ./build.sh
+          ./build.sh
 
       - name: Create Release
         id: create_release
