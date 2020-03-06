@@ -13,11 +13,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Build project 
+        id: build-project
         run: |
           bash
           set -e
           set -x
-          bash ./build.sh
+          export DMG_FINAL="mytestfile.dmg"
+          echo ::set-output name=asset-path::$(echo $DMG_FINAL)
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -35,7 +38,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: ./*.dmg
-          asset_name: thg-for-mac.dmg
+          asset_path: ./${{ steps.build-project.outputs.asset-path }}
+          asset_name: ${{ steps.build-project.outputs.asset-path }}
           asset_content_type: application/octet-stream
 
