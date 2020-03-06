@@ -18,8 +18,9 @@ jobs:
           bash
           set -e
           set -x
-          export DMG_FINAL="mytestfile.dmg"
+          source toolchain/app_output_config.conf
           echo ::set-output name=asset-path::$(echo $DMG_FINAL)
+#          ./build.sh
 
       - name: Create Release
         id: create_release
