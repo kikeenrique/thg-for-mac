@@ -14,10 +14,7 @@ function log() {
 function load_env() {
     export SHELL="time sh -xv"
 
-    export APP_NAME="TortoiseHg"
-    export THG_VERSION="4.9.1"
-    export QT_VERSION="qt5"
-
+    . toolchain/app_output_config.conf
     . toolchain/build_settings.conf
 
     export PRECOMPILED_FILE="${DISTDIR}.zip"

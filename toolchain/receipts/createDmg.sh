@@ -5,9 +5,8 @@ DMG_BACKGROUND_IMG="background.png"
 # you should not need to change these
 APP_EXE="${APP_NAME}.app/Contents/MacOS/${APP_NAME}"
 
-VOL_NAME="${APP_NAME}-${THG_VERSION}"
-DMG_TMP="${VOL_NAME}-temp.dmg"
-DMG_FINAL="${VOL_NAME}-mac-x64-${QT_VERSION}.dmg"
+. toolchain/app_output_config.conf
+
 STAGING_DIR="./dist"
 
 rm "${STAGING_DIR}"/.DS_Store
