@@ -45,38 +45,6 @@ function execute_receipt() {
     ${SHELL} toolchain/receipts/$1
 }
 
-function zip_precompiled_build_dependencies() {
-    log zip_precompiled_build_dependencies
-
-    # create zip cached, not on bitrise
-    if [ -z "${BITRISE_APP_TITLE}" ]; then
-        cd "${DISTDIR}/.."
-        if [ "${QT_VERSION}" = "qt5" ]; then
-          export TARGET="toolchain-qt5"
-        else
-          export TARGET="toolchain-qt4"
-        fi
-        echo "${PRECOMPILED_FILE} ${TARGET}"
-        rm -f ${PRECOMPILED_FILE}
-        zip -rq ${PRECOMPILED_FILE} ${TARGET}
-        cd ${ROOT_DIR}
-    fi
-}
-
-function unzip_precompiled_build_dependencies() {
-    log unzip_precompiled_build_dependencies
-
-    if [ ! -z "${BITRISE_APP_TITLE}" ]; then
-        # unzip precompile, just on bitrise
-        log "look for precompiled libraries... ${PRECOMPILED_FILE}"
-        if [ -f ${PRECOMPILED_FILE} ]; then
-            log "using precompiled libraries"
-            unzip -q ${PRECOMPILED_FILE} -d ${ROOT_DIR}/toolchain
-        fi
-        ls -la ${DISTDIR}
-    fi
-}
-
 function clean_build() {
     log clean_build
 
@@ -110,8 +78,6 @@ function create_DMG() {
 
 load_env
 
-unzip_precompiled_build_dependencies
-
 print_env
 
 rm -rf dist/TortoiseHg.app
@@ -134,7 +100,5 @@ execute_receipt tortoisehg.sh
 # create application package
 log "application package"
 python setup.py
-
-zip_precompiled_build_dependencies
 
 create_DMG
