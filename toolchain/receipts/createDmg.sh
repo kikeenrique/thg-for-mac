@@ -1,4 +1,10 @@
-#!/bin/sh
+#!/bin/zsh
+
+set -euo pipefail
+
+unmount_DEVICE () {
+    [ -n "${DEVICE-}" ] && hdiutil detach "${DEVICE}"
+}
 
 DMG_BACKGROUND_IMG="background.png"
 
@@ -23,6 +29,8 @@ fi
 
 echo "Volume Size: ${SIZE}M"
 
+rm -f "${DMG_TMP}"
+
 # create the temp DMG file
 hdiutil create -srcfolder "${STAGING_DIR}" -volname "${VOL_NAME}" -fs HFS+ \
       -fsargs "-c c=64,a=16,e=16" -format UDRW -size ${SIZE}M "${DMG_TMP}"
@@ -30,6 +38,7 @@ hdiutil create -srcfolder "${STAGING_DIR}" -volname "${VOL_NAME}" -fs HFS+ \
 echo "Created DMG: ${DMG_TMP}"
 
 # mount it and save the device
+trap unmount_DEVICE EXIT
 DEVICE=$(hdiutil attach -readwrite -noverify "${DMG_TMP}" | \
          egrep '^/dev/' | sed 1q | awk '{print $1}')
 
@@ -38,7 +47,7 @@ sleep 5
 # add a link to the Applications dir
 echo "Add link to /Applications"
 pushd /Volumes/"${VOL_NAME}"
-ln -s /Applications
+ln -f -s /Applications
 popd
 
 # add a background image
@@ -66,16 +75,16 @@ echo '
            update without registering applications
            delay 3
 
-		   set dsStore to "\"" & "/Volumes/" & "'${VOL_NAME}'" & "/" & ".DS_STORE\""
-		   set waitTime to 0
-		   set ejectMe to false
-		   repeat while ejectMe is false
-			   delay 1
-			   set waitTime to waitTime + 1
+           set dsStore to "\"" & "/Volumes/" & "'${VOL_NAME}'" & "/" & ".DS_STORE\""
+           set waitTime to 0
+           set ejectMe to false
+           repeat while ejectMe is false
+               delay 1
+               set waitTime to waitTime + 1
 
-			   if (do shell script "[ -f " & dsStore & " ]; echo $?") = "0" then set ejectMe to true
-		   end repeat
-		   log "waited " & waitTime & " seconds for .DS_STORE to be created."
+               if (do shell script "[ -f " & dsStore & " ]; echo $?") = "0" then set ejectMe to true
+           end repeat
+           log "waited " & waitTime & " seconds for .DS_STORE to be created."
            close
      end tell
    end tell
@@ -86,18 +95,22 @@ sync
 
 # unmount it
 hdiutil detach "${DEVICE}"
+trap - EXIT
 
 # now make the final image a compressed disk image
-echo "Clean previous image file"
-rm -f ${DMG_FINAL}
-
 echo "Creating compressed image"
+echo "Clean previous image file"
+rm -rf "${DMG_FINAL}"
 hdiutil convert "${DMG_TMP}" -format UDZO -imagekey zlib-level=9 -o "${DMG_FINAL}"
 
 # clean up
 rm -rf "${DMG_TMP}"
 #rm -rf "${STAGING_DIR}"
 
-echo 'Done.'
+# Requires 10.11.5 or later
+if [ -n "${CODE_SIGN_IDENTITY:-}" ]; then
+  echo "Signing disk image"
+  codesign -s "${CODE_SIGN_IDENTITY}" --timestamp ${DMG_FINAL}
+fi
 
-exit
+echo 'Done.'

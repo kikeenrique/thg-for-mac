@@ -17,10 +17,6 @@ BUILDDIRHG = os.environ['BUILDDIR'] + "/mercurial-" + os.environ['THG_VERSION']
 
 fileToPatch = 'src/thg.py'
 shutil.copyfile( BUILDDIRTHG + '/thg', fileToPatch)
-patchFile = 'src/thg-path.patch'
-cmd = '%s "%s" "%s"' % ("/usr/bin/patch", fileToPatch, patchFile)
-print("\n"+cmd)
-ret = os.system(cmd)
 
 APP = [ 'src/thg.py']
 
@@ -31,7 +27,7 @@ DATA_FILES = [
 ]
 
 PYQT_VERSION = 'PyQt5'
-QT_PLUGINS = []
+QT_PLUGINS = []  # TODO: reconcile with the list in the main setup.py
 
 EXCLUDES = [
     PYQT_VERSION + '.QtScriptTools',
@@ -49,17 +45,12 @@ EXCLUDES = [
     PYQT_VERSION + '.phonon',
 ]
 
-#sys.path.append("/src/extra")
-
 sys.path.append(os.environ['ROOT_DIR'] + "/src/extra")
-#sys.path.append(os.environ['DISTDIR'])
-#print("PATH post" )
-#print(sys.path)
-
 OPTIONS = {
+    'no_chdir': True,
     'includes' : ['email.mime.text', 'mercurial_keyring', 'sip', 'sitecustomize'],
     'packages' : ['certifi', 'mercurial', 'hgext', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
-#    'packages' : ['certifi', 'mercurial', 'hgext3rd', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
+    'extra_scripts': ['src/thg/contrib/hg'],
     'excludes' : EXCLUDES,
     'iconfile' : 'src/TortoiseHg.icns',
     'qt_plugins' : QT_PLUGINS,
@@ -72,9 +63,9 @@ OPTIONS = {
     CFBundleDisplayName = 'TortoiseHg',
     CFBundleIdentifier = 'org.pythonmac.tortoisehg.thg',
     CFBundleName = 'TortoiseHg',
-    NSHumanReadableCopyright = 'Copyright 2008-2018 Steve Borho and others',
-    CFBundleShortVersionString = os.environ['THG_VERSION'],
-    CFBundleVersion = os.environ['THG_VERSION']
+    NSHumanReadableCopyright = 'Copyright 2008-2020 Steve Borho and others',
+    CFBundleShortVersionString = os.environ['THG_CFVERSION'],
+    CFBundleVersion = os.environ['THG_CFVERSION']
     )
 }
 

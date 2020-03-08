@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/bin/zsh
+
+set -euo pipefail
 
 . toolchain/build_settings.conf
 
 NAME="qt-everywhere-opensource-src"
-VERSION="5.9.8"
+VERSION="5.9.9"
 VERIFY_FILE="${DISTDIR}/usr/bin/qmake"
 DOWNLOAD_ADDR="http://download.qt.io/official_releases/qt/5.9/${VERSION}/single/${NAME}-${VERSION}.tar.xz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz"
@@ -16,11 +18,11 @@ if [ ! -f $VERIFY_FILE ]; then
   fi
 
   rm -rf ${BUILDDIR}/${NAME}-${VERSION}
-  mkdir -p toolchain/build
+  mkdir -p ${BUILDDIR}
 
   if [ ! -d ${BUILDDIR}/${NAME}-${VERSION} ]; then
     echo "Extracting ${DOWNLOAD_FILE}"
-    cd toolchain/build
+    cd ${BUILDDIR}
     tar -xf ${DOWNLOAD_FILE}
     cd ${NAME}-${VERSION}
   else

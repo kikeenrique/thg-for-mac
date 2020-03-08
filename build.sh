@@ -51,6 +51,14 @@ function clean_build() {
     rm -rf build
     rm -rf toolchain/build
 }
+
+function thg_environment() {
+    # CFVersion is always x.y.z format.  The plain version will have changeset info
+    # in non-tagged builds.
+    export THG_CFVERSION=`python -c 'from tortoisehg.util import version; print(version.package_version())'`
+    export THG_VERSION=`python -c 'from tortoisehg.util import version; print(version.version())'`
+}
+
 function clean_all() {
     log clean_all
 
@@ -66,10 +74,14 @@ function create_DMG() {
     if [ -d dist/${APP_NAME}.app ]; then
         clean_build
 
-        if [ "${QT_VERSION}" = "qt5" ]; then
-            macdeployqt dist/${APP_NAME}.app -always-overwrite
-            cp -R ${DISTDIR}/usr/lib/QtNetwork.framework dist/${APP_NAME}.app/Contents/Frameworks/
+        macdeployqt dist/${APP_NAME}.app -always-overwrite
+        cp -R ${DISTDIR}/usr/lib/QtNetwork.framework dist/${APP_NAME}.app/Contents/Frameworks/
+
+        if [ -n "${CODE_SIGN_IDENTITY:-}" ]; then  
+            echo "Signing app bundle"
+            src/thg/contrib/sign-py2app.sh dist/${APP_NAME}.app
         fi
+
         execute_receipt "createDmg.sh"
     fi
 }
@@ -87,15 +99,16 @@ execute_receipt openssl.sh
 execute_receipt python.sh
 execute_receipt pip.sh
 print_env
+execute_receipt packages.sh
 execute_receipt "${QT_VERSION}.sh"
 execute_receipt qscintilla.sh
 execute_receipt sip.sh
 execute_receipt "py${QT_VERSION}.sh"
 execute_receipt qscintilla.sh
 print_env
-execute_receipt packages.sh
 execute_receipt mercurial.sh
 execute_receipt tortoisehg.sh
+thg_environment
 
 # create application package
 log "application package"

@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/bin/zsh
+
+set -euo pipefail
 
 . toolchain/build_settings.conf
 
-NAME="PyQt5_gpl"
-VERSION="5.9.2"
+NAME="PyQt5"
+VERSION="5.13.2"
 VERIFY_FILE="${DISTDIR}/usr/bin/pyuic5"
-DOWNLOAD_ADDR="http://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-${VERSION}/${NAME}-${VERSION}.tar.gz"
+DOWNLOAD_ADDR="https://www.riverbankcomputing.com/static/Downloads/PyQt5/${VERSION}/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 
 if [ ! -f $VERIFY_FILE ]; then
@@ -16,11 +18,11 @@ if [ ! -f $VERIFY_FILE ]; then
   fi
 
   rm -rf ${BUILDDIR}/${NAME}-${VERSION}
-  mkdir -p toolchain/build
+  mkdir -p ${BUILDDIR}
 
   if [ ! -d ${BUILDDIR}/${NAME}-${VERSION} ]; then
     echo "Extracting ${DOWNLOAD_FILE}"
-    cd toolchain/build
+    cd ${BUILDDIR}
     tar -xf ${DOWNLOAD_FILE}
     cd ${NAME}-${VERSION}
   else

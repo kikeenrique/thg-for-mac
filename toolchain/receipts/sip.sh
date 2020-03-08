@@ -1,11 +1,13 @@
-#!/bin/sh
+#!/bin/zsh
+
+set -euo pipefail
 
 . toolchain/build_settings.conf
 
 NAME="sip"
-VERSION="4.19.13"
+VERSION="4.19.20"
 VERIFY_FILE="${DISTDIR}/usr/bin/sip"
-DOWNLOAD_ADDR="http://sourceforge.net/projects/pyqt/files/sip/${NAME}-${VERSION}/${NAME}-${VERSION}.tar.gz"
+DOWNLOAD_ADDR="https://www.riverbankcomputing.com/static/Downloads/sip/${VERSION}/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 
 if [ ! -f $VERIFY_FILE ]; then
@@ -16,11 +18,11 @@ if [ ! -f $VERIFY_FILE ]; then
   fi
 
   rm -rf ${BUILDDIR}/${NAME}-${VERSION}
-  mkdir -p toolchain/build
+  mkdir -p ${BUILDDIR}
 
   if [ ! -d ${BUILDDIR}/${NAME}-${VERSION} ]; then
     echo "Extracting ${DOWNLOAD_FILE}"
-    cd toolchain/build
+    cd ${BUILDDIR}
     tar -xf ${DOWNLOAD_FILE}
     cd ${NAME}-${VERSION}
   else
@@ -28,8 +30,10 @@ if [ ! -f $VERIFY_FILE ]; then
   fi
 
   #sed -i '' 's/PyStringCheck/PyString_Check/g' siplib/siplib.c
-  #python configure.py --bindir=${DISTDIR}/usr/bin --sip-module PyQt5.sip
-  python configure.py --bindir=${DISTDIR}/usr/bin
+
+  # PyQt5.11 and later needs `--sip-module PyQt5.sip`
+  # https://stackoverflow.com/a/57381325
+  python configure.py --bindir=${DISTDIR}/usr/bin --sip-module PyQt5.sip
   make ${MAKE_JOBS}
   make install
 

@@ -6,7 +6,6 @@ build
 dist
 toolchain/build
 toolchain/downloads
-toolchain/toolchain-qt4
 toolchain/toolchain-qt5
 releases
 

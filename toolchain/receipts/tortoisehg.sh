@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/zsh
+
+set -euo pipefail
 
 . toolchain/build_settings.conf
 

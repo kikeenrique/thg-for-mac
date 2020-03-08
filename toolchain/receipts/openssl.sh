@@ -1,9 +1,11 @@
-#!/bin/sh
+#!/bin/zsh
+
+set -euo pipefail
 
 . toolchain/build_settings.conf
 
 NAME="openssl"
-VERSION="1.0.2s"
+VERSION="1.0.2u"
 VERIFY_FILE=${DISTDIR}/usr/lib/libcrypto.a
 DOWNLOAD_ADDR=https://www.openssl.org/source/${NAME}-${VERSION}.tar.gz
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz
@@ -16,11 +18,11 @@ if [ ! -f $VERIFY_FILE ]; then
   fi
 
   rm -rf ${BUILDDIR}/${NAME}-${VERSION}
-  mkdir -p toolchain/build
+  mkdir -p ${BUILDDIR}
 
   if [ ! -d ${BUILDDIR}/${NAME}-${VERSION} ]; then
     echo "Extracting ${DOWNLOAD_FILE}"
-    cd toolchain/build
+    cd ${BUILDDIR}
     tar -xf ${DOWNLOAD_FILE}
     cd ${NAME}-${VERSION}
   else
@@ -45,7 +47,6 @@ if [ ! -f $VERIFY_FILE ]; then
   make install
 
   cd $ROOT_DIR
-
 else
   echo "${NAME} already installed."
 fi
