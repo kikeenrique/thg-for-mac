@@ -30,12 +30,8 @@ DATA_FILES = [
     BUILDDIRTHG + '/COPYING.txt',
 ]
 
-if os.environ['QT_VERSION'] == 'qt5':
-    PYQT_VERSION = 'PyQt5'
-    QT_PLUGINS = []
-else:
-    PYQT_VERSION = 'PyQt4'
-    QT_PLUGINS = [ 'imageformats' ]
+PYQT_VERSION = 'PyQt5'
+QT_PLUGINS = []
 
 EXCLUDES = [
     PYQT_VERSION + '.QtScriptTools',

@@ -3,13 +3,8 @@
 . toolchain/build_settings.conf
 
 NAME="QScintilla_gpl"
-if [ ${QT_VERSION} = "qt5" ]; then
-  VERSION="2.10.8"
-  LIBRARY_VERIFY_FILE="${DISTDIR}/usr/lib/libqscintilla2_qt5.dylib"
-else
-  VERSION="2.9.4"
-  LIBRARY_VERIFY_FILE="${DISTDIR}/usr/lib/libqscintilla2.dylib"
-fi
+VERSION="2.10.8"
+LIBRARY_VERIFY_FILE="${DISTDIR}/usr/lib/libqscintilla2_qt5.dylib"
 BINDINGS_VERIFY_FILE="${DISTDIR}/usr/share/qt/qsci/api/python/QScintilla2.api"
 DOWNLOAD_ADDR="http://sourceforge.net/projects/pyqt/files/QScintilla2/QScintilla-${VERSION}/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
