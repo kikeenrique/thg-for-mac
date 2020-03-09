@@ -1,0 +1,8 @@
+**/.DS_Store
+.vscode
+src/thg.py
+build
+dist
+toolchain/build
+toolchain/downloads
+toolchain/toolchain-qt5
