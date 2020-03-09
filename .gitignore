@@ -6,3 +6,4 @@ dist
 toolchain/build
 toolchain/downloads
 toolchain/toolchain-qt5
+toolchain/receipts/requirements.txt
