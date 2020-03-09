@@ -5,7 +5,7 @@ set -euo pipefail
 . toolchain/build_settings.conf
 
 NAME="tortoisehg"
-VERSION="4.9.1"
+VERSION="5.0.2"
 VERIFY_FILE="${DISTDIR}/${NAME}-${VERSION}/thg"
 DOWNLOAD_ADDR="https://bitbucket.org/tortoisehg/targz/downloads/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
