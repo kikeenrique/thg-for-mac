@@ -17,7 +17,7 @@ if [ ! -f $VERIFY_FILE ]; then
   fi
 
   echo "PATH--> ${PATH}"
-  python -v
+  python -V
   python -vv ${DOWNLOAD_FILE}
 
   cd $ROOT_DIR

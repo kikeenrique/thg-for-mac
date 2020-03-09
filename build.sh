@@ -1,7 +1,7 @@
-#/bin/sh -xv
+#!/bin/zsh -xv
 
 # Configure shell to exit if any script finish with error
-set -e
+set -eu
 # Configure bashism to exit if piped output also finish with error
 set -o pipefail
 
@@ -12,7 +12,7 @@ function log() {
 }
 
 function load_env() {
-    export SHELL="time sh -xv"
+    export SHELL=(time zsh -xv)
 
     . toolchain/app_output_config.conf
     . toolchain/build_settings.conf
@@ -23,8 +23,6 @@ function load_env() {
 function print_env() {
     printf "+-------------------------------\n"
     which -a python
-    printf "+-------------------\n"
-    /usr/bin/env python
     printf "+-------------------\n"
     which -a pip
     printf "+EXPORTED: \n"
@@ -77,7 +75,7 @@ function create_DMG() {
         macdeployqt dist/${APP_NAME}.app -always-overwrite
         cp -R ${DISTDIR}/usr/lib/QtNetwork.framework dist/${APP_NAME}.app/Contents/Frameworks/
 
-        if [ -n "${CODE_SIGN_IDENTITY:-}" ]; then  
+        if [ -n "${CODE_SIGN_IDENTITY:}" ]; then  
             echo "Signing app bundle"
             src/thg/contrib/sign-py2app.sh dist/${APP_NAME}.app
         fi
