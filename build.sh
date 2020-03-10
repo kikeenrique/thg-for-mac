@@ -75,7 +75,7 @@ function create_DMG() {
         macdeployqt dist/${APP_NAME}.app -always-overwrite
         cp -R ${DISTDIR}/usr/lib/QtNetwork.framework dist/${APP_NAME}.app/Contents/Frameworks/
 
-        if [ -n "${CODE_SIGN_IDENTITY:}" ]; then  
+        if [ -n "${CODE_SIGN_IDENTITY+1}" ]; then
             echo "Signing app bundle"
             src/thg/contrib/sign-py2app.sh dist/${APP_NAME}.app
         fi

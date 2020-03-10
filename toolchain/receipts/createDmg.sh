@@ -108,7 +108,7 @@ rm -rf "${DMG_TMP}"
 #rm -rf "${STAGING_DIR}"
 
 # Requires 10.11.5 or later
-if [ -n "${CODE_SIGN_IDENTITY:-}" ]; then
+if [ -n "${CODE_SIGN_IDENTITY+1}" ]; then
   echo "Signing disk image"
   codesign -s "${CODE_SIGN_IDENTITY}" --timestamp ${DMG_FINAL}
 fi
