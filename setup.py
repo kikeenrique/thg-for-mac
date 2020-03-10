@@ -50,7 +50,7 @@ OPTIONS = {
     'no_chdir': True,
     'includes' : ['email.mime.text', 'mercurial_keyring', 'sip', 'sitecustomize'],
     'packages' : ['certifi', 'mercurial', 'hgext', 'tortoisehg', 'pygments', 'iniparse', 'keyring'],
-    'extra_scripts': ['src/thg/contrib/hg'],
+#    'extra_scripts': ['src/thg/contrib/hg'],
     'excludes' : EXCLUDES,
     'iconfile' : 'src/TortoiseHg.icns',
     'qt_plugins' : QT_PLUGINS,
