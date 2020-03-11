@@ -18,11 +18,11 @@ if [ ! -L $VERIFY_FILE ]; then
   fi
   
   rm -rf ${BUILDDIR}/${NAME}-${VERSION}
-  mkdir -p toolchain/build
+  mkdir -p ${BUILDDIR}
 
   if [ ! -d ${BUILDDIR}/${NAME}-${VERSION} ]; then
     echo "Extracting ${DOWNLOAD_FILE}"
-    cd toolchain/build
+    cd ${BUILDDIR}
     tar -xf ${DOWNLOAD_FILE}
     cd ${NAME}-${VERSION}
   else
