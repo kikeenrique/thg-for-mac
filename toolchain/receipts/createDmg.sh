@@ -58,27 +58,32 @@ cp "src/${DMG_BACKGROUND_IMG}" /Volumes/"${VOL_NAME}"/.background/
 #  change the icon size, place the icons in the right position, etc.
 echo '
    tell application "Finder"
+     log "debug point 1"
      tell disk "'${VOL_NAME}'"
+           log "debug point 2"
            open
            set current view of container window to icon view
            set toolbar visible of container window to false
            set statusbar visible of container window to false
+           log "debug point 3"
            set the bounds of container window to {400, 100, 1040, 580}
            set viewOptions to the icon view options of container window
            set arrangement of viewOptions to not arranged
            set icon size of viewOptions to 160
+           log "debug point 4"  
            set background picture of viewOptions to file ".background:'${DMG_BACKGROUND_IMG}'"
            set position of item "'${APP_NAME}'.app" of container window to {135, 285}
            set position of item "Applications" of container window to {510, 285}
            close
+           log "debug point 5"
            open
            update without registering applications
            delay 10
-           log "debug point 1"
+           log "debug point 6"
 
            set dsStore to "\"" & "/Volumes/" & "'${VOL_NAME}'" & "/" & ".DS_STORE\""
            set waitTime to 5
-           log "debug point 2"
+           log "debug point 7"
            set ejectMe to false
            repeat while ejectMe is false
                delay 1
