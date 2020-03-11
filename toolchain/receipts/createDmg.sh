@@ -73,10 +73,12 @@ echo '
            close
            open
            update without registering applications
-           delay 3
+           delay 10
+           log "debug point 1"
 
            set dsStore to "\"" & "/Volumes/" & "'${VOL_NAME}'" & "/" & ".DS_STORE\""
-           set waitTime to 0
+           set waitTime to 5
+           log "debug point 2"
            set ejectMe to false
            repeat while ejectMe is false
                delay 1
