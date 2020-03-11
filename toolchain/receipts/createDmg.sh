@@ -15,7 +15,7 @@ APP_EXE="${APP_NAME}.app/Contents/MacOS/${APP_NAME}"
 
 STAGING_DIR="./dist"
 
-rm "${STAGING_DIR}"/.DS_Store
+rm -f "${STAGING_DIR}"/.DS_Store
 
 # figure out how big our DMG needs to be
 #  assumes our contents are at least 1M!
