@@ -54,7 +54,7 @@ popd
 mkdir /Volumes/"${VOL_NAME}"/.background
 cp "src/${DMG_BACKGROUND_IMG}" /Volumes/"${VOL_NAME}"/.background/
 
-if [ -n "${GITHUB_ACTIONS+1}" ]; then
+if [ -z "${GITHUB_ACTIONS+1}" ]; then
     # tell the Finder to resize the window, set the background,
     #  change the icon size, place the icons in the right position, etc.
     echo '
