@@ -8,10 +8,10 @@ unmount_DEVICE () {
 
 DMG_BACKGROUND_IMG="background.png"
 
+. toolchain/app_output_config.conf
+
 # you should not need to change these
 APP_EXE="${APP_NAME}.app/Contents/MacOS/${APP_NAME}"
-
-. toolchain/app_output_config.conf
 
 STAGING_DIR="./dist"
 
