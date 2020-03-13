@@ -58,38 +58,37 @@ if [ -z "${GITHUB_ACTIONS+1}" ]; then
     # tell the Finder to resize the window, set the background,
     #  change the icon size, place the icons in the right position, etc.
     echo '
-        tell application "Finder"
-            try
-                tell disk "'${VOL_NAME}'"
-                    open
-                    set current view of container window to icon view
-                    set toolbar visible of container window to false
-                    set statusbar visible of container window to false
-                    set the bounds of container window to {400, 100, 1040, 580}
-                    set viewOptions to the icon view options of container window
-                    set arrangement of viewOptions to not arranged
-                    set icon size of viewOptions to 160
-                    set background picture of viewOptions to file ".background:'${DMG_BACKGROUND_IMG}'"
-                    set position of item "'${APP_NAME}'.app" of container window to {135, 285}
-                    set position of item "Applications" of container window to {510, 285}
-                    close
-                    open
-                    update without registering applications
-                    delay 10
+    tell application "Finder"
+        tell disk "'${VOL_NAME}'"
+            open
+            set current view of container window to icon view
+            set toolbar visible of container window to false
+            set statusbar visible of container window to false
+            set the bounds of container window to {400, 100, 1040, 580}
+            set viewOptions to the icon view options of container window
+            set arrangement of viewOptions to not arranged
+            set icon size of viewOptions to 160
+            set background picture of viewOptions to file ".background:'${DMG_BACKGROUND_IMG}'"
+            set position of item "'${APP_NAME}'.app" of container window to {135, 285}
+            set position of item "Applications" of container window to {510, 285}
+            close
+            open
+            update without registering applications
+            delay 3
 
-                    set dsStore to "\"" & "/Volumes/" & "'${VOL_NAME}'" & "/" & ".DS_STORE\""
-                    set waitTime to 5
-                    set ejectMe to false
-                    repeat while ejectMe is false
-                        delay 1
-                        set waitTime to waitTime + 1
+            set dsStore to "\"" & "/Volumes/" & "'${VOL_NAME}'" & "/" & ".DS_STORE\""
+            set waitTime to 0
+            set ejectMe to false
+            repeat while ejectMe is false
+                delay 1
+                set waitTime to waitTime + 1
 
-                        if (do shell script "[ -f " & dsStore & " ]; echo $?") = "0" then set ejectMe to true
-                    end repeat
-                    log "waited " & waitTime & " seconds for .DS_STORE to be created."
-                    close
-                end tell
+                if (do shell script "[ -f " & dsStore & " ]; echo $?") = "0" then set ejectMe to true
+            end repeat
+            log "waited " & waitTime & " seconds for .DS_STORE to be created."
+            close
         end tell
+    end tell
     ' | osascript
 else
     echo "skipped osascript in CI environment"
