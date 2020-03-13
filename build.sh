@@ -24,7 +24,7 @@ function print_env() {
     printf "+-------------------------------\n"
     which -a python
     printf "+-------------------\n"
-    which -a pip
+    which -a pip || true
     printf "+EXPORTED: \n"
     export
     printf "PWD:${PWD}\n"
