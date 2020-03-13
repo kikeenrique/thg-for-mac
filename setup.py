@@ -17,6 +17,10 @@ BUILDDIRHG = os.environ['BUILDDIR'] + "/mercurial-" + os.environ['THG_VERSION']
 
 fileToPatch = 'src/thg.py'
 shutil.copyfile( BUILDDIRTHG + '/thg', fileToPatch)
+patchFile = 'src/thg-path.patch'
+cmd = '%s "%s" "%s"' % ("/usr/bin/patch", fileToPatch, patchFile)
+print("\n"+cmd)
+ret = os.system(cmd)
 
 APP = [ 'src/thg.py']
 
