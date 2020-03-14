@@ -5,8 +5,8 @@ set -euo pipefail
 . toolchain/build_settings.conf
 
 NAME="Python"
-VERSION="2.7.17"
-VERIFY_FILE=${DISTDIR}/usr/bin/python
+VERSION="3.7.7"
+VERIFY_FILE=${DISTDIR}/usr/bin/python3
 DOWNLOAD_ADDR=https://www.python.org/ftp/python/${VERSION}/${NAME}-${VERSION}.tar.xz
 DOWNLOAD_FILE=${DOWNLOADDIR}/${NAME}-${VERSION}.tar.xz
 
@@ -29,20 +29,6 @@ if [ ! -f ${VERIFY_FILE} ]; then
   else
     cd ${BUILDDIR}/${NAME}-${VERSION}
   fi
-  
-  patch -p0 <<'EOT'
---- Makefile.pre.in.ORIG	2019-07-14 16:24:12.000000000 -0400
-+++ Makefile.pre.in	2019-07-14 16:24:19.000000000 -0400
-@@ -211,7 +211,7 @@
- # The task to run while instrument when building the profile-opt target
- # We exclude unittests with -x that take a rediculious amount of time to
- # run in the instrumented training build or do not provide much value.
--PROFILE_TASK=-m test.regrtest --pgo -x test_asyncore test_gdb test_multiprocessing test_subprocess
-+PROFILE_TASK=-m test.regrtest --pgo -x test_asyncore test_gdb test_multiprocessing test_subprocess test_mailbox
-
- # report files for gcov / lcov coverage report
- COVERAGE_INFO=	$(abs_builddir)/coverage.info
-EOT
 
   export CC="clang"
   export CXX="clang++"
@@ -57,6 +43,7 @@ EOT
     --with-threads \
     --enable-framework="${DISTDIR}/System/Library/Frameworks" \
     --enable-toolbox-glue \
+    --with-openssl="${DISTDIR}/usr" \
     --enable-optimizations
 
   make ${MAKE_JOBS}

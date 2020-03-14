@@ -29,11 +29,16 @@ if [ ! -f $VERIFY_FILE ]; then
     cd ${BUILDDIR}/${NAME}-${VERSION}
   fi
 
-  python configure.py --bindir=${DISTDIR}/usr/bin --confirm-license
+  python3 configure.py --help
+  python3 configure.py \
+    --bindir=${DISTDIR}/usr/bin \
+    --confirm-license \
+    --verbose
+
   make ${MAKE_JOBS}
   make install
 
-  rm -rf "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python2.7/site-packages/PyQt5/uic/port_v3"
+  rm -rf "${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/lib/python3.7/site-packages/PyQt5/uic/port_v2"
   cd $ROOT_DIR
 else
   echo "${NAME} already installed."

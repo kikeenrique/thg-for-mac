@@ -91,6 +91,6 @@ setup(
 )
 print("phase copyfile ..." )
 
-shutil.copyfile( 'src/config.py', 'dist/TortoiseHg.app/Contents/Resources/lib/python2.7/tortoisehg/util/config.py')
-shutil.copyfile( BUILDDIRHG + '/hg', 'dist/TortoiseHg.app/Contents/Resources/lib/python2.7/hg')
-os.chmod('dist/TortoiseHg.app/Contents/Resources/lib/python2.7/hg', 0755)
+shutil.copyfile( 'src/config.py', 'dist/TortoiseHg.app/Contents/Resources/lib/python3.7/tortoisehg/util/config.py')
+shutil.copyfile( BUILDDIRHG + '/hg', 'dist/TortoiseHg.app/Contents/Resources/lib/python3.7/hg')
+os.chmod('dist/TortoiseHg.app/Contents/Resources/lib/python3.7/hg', 0o755)

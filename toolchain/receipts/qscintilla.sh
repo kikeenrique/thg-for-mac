@@ -53,7 +53,7 @@ if [ ${BUILD_LIBRARY} -eq 1 ] || [ ${BUILD_BINDINGS} -eq 1 ]; then
 
   if [ ${BUILD_BINDINGS} -eq 1 ]; then
     cd Python
-    python configure.py --pyqt=PyQt5
+    python3 configure.py --pyqt=PyQt5
     make ${MAKE_JOBS}
     make install
     cd -

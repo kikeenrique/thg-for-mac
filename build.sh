@@ -22,9 +22,9 @@ function load_env() {
 
 function print_env() {
     printf "+-------------------------------\n"
-    which -a python
+    which -a python3
     printf "+-------------------\n"
-    which -a pip || true
+    which -a pip3 || true
     printf "+EXPORTED: \n"
     export
     printf "PWD:${PWD}\n"
@@ -53,8 +53,8 @@ function clean_build() {
 function thg_environment() {
     # CFVersion is always x.y.z format.  The plain version will have changeset info
     # in non-tagged builds.
-    export THG_CFVERSION=`python -c 'from tortoisehg.util import version; print(version.package_version())'`
-    export THG_VERSION=`python -c 'from tortoisehg.util import version; print(version.version())'`
+    export THG_CFVERSION=`python3 -c 'from tortoisehg.util import version; print(version.package_version())'`
+    export THG_VERSION=`python3 -c 'from tortoisehg.util import version; print(version.version())'`
 }
 
 function clean_all() {
@@ -110,6 +110,6 @@ thg_environment
 
 # create application package
 log "application package"
-python setup.py
+python3 setup.py
 
 create_DMG

@@ -33,7 +33,7 @@ if [ ! -f $VERIFY_FILE ]; then
 
   # PyQt5.11 and later needs `--sip-module PyQt5.sip`
   # https://stackoverflow.com/a/57381325
-  python configure.py --bindir=${DISTDIR}/usr/bin --sip-module PyQt5.sip
+  python3 configure.py --bindir=${DISTDIR}/usr/bin --sip-module PyQt5.sip
   make ${MAKE_JOBS}
   make install
 
