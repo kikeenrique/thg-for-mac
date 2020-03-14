@@ -8,7 +8,7 @@ set -euo pipefail
 NAME="tortoisehg"
 VERSION="${THG_VERSION}"
 VERIFY_FILE="${DISTDIR}/${NAME}-${VERSION}/thg"
-DOWNLOAD_ADDR="https://bitbucket.org/tortoisehg/targz/downloads/${NAME}-${VERSION}.tar.gz"
+DOWNLOAD_ADDR="https://bitbucket.org/tortoisehg/thg/get/${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 
 if [ ! -f $VERIFY_FILE ]; then
@@ -25,7 +25,7 @@ if [ ! -f $VERIFY_FILE ]; then
     echo "Extracting ${DOWNLOAD_FILE}"
     cd ${BUILDDIR}
     tar -xf ${DOWNLOAD_FILE}
-    cd ${NAME}-${VERSION}
+    cd *
   else
     cd ${BUILDDIR}/${NAME}-${VERSION}
   fi
