@@ -26,7 +26,8 @@ if [ ! -f $VERIFY_FILE ]; then
     cd ${BUILDDIR}
     tar -xf ${DOWNLOAD_FILE}
     # need to cd into folder like this beacuse it's not possible to extract a pattern: tortoisehg-thg-89b2d1787506
-    cd ${NAME}*
+    mv ${NAME}* ${NAME}-${VERSION}
+    cd ${NAME}-${VERSION}
   else
     cd ${BUILDDIR}/${NAME}-${VERSION}
   fi
