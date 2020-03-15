@@ -3,10 +3,11 @@
 set -euo pipefail
 
 . toolchain/build_settings.conf
+. toolchain/app_output_config.conf
 
 NAME="mercurial"
-VERSION="5.0.2"
-VERIFY_FILE="${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/2.7/bin/hg"
+VERSION="${HG_VERSION}"
+VERIFY_FILE="${DISTDIR}/System/Library/Frameworks/Python.framework/Versions/Current/bin/hg"
 DOWNLOAD_ADDR="https://www.mercurial-scm.org/release/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
 

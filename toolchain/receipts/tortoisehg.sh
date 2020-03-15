@@ -3,9 +3,10 @@
 set -euo pipefail
 
 . toolchain/build_settings.conf
+. toolchain/app_output_config.conf
 
 NAME="tortoisehg"
-VERSION="5.0.2"
+VERSION="${THG_VERSION}"
 VERIFY_FILE="${DISTDIR}/${NAME}-${VERSION}/thg"
 DOWNLOAD_ADDR="https://bitbucket.org/tortoisehg/targz/downloads/${NAME}-${VERSION}.tar.gz"
 DOWNLOAD_FILE="${DOWNLOADDIR}/${NAME}-${VERSION}.tar.gz"
