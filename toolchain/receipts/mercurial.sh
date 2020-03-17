@@ -30,9 +30,9 @@ if [ ! -L $VERIFY_FILE ]; then
     cd ${BUILDDIR}/${NAME}-${VERSION}
   fi
 
-  python setup.py clean
-  python setup.py build
-  python setup.py install
+  python3 setup.py clean
+  python3 setup.py build
+  python3 setup.py install
 
   cd $ROOT_DIR
 
